@@ -1,7 +1,7 @@
 var map, featureList;
 
 $(document).on("click", ".feature-row", function(e) {
-  sidebarClick(parseInt($(this).attr("id"), 10));
+  sidebarClick($(this).attr("id"));
 });
 
 $("#about-btn").click(function() {
@@ -39,10 +39,9 @@ $("#sidebar-hide-btn").click(function() {
 });
 
 function sidebarClick(id) {
-  // map.addLayer(theaterLayer).addLayer(museumLayer);
-  var layer = markerClusters.getLayer(id);
-  map.setView([layer.getLatLng().lat, layer.getLatLng().lng], 17);
-  layer.fire("click");
+  marker = zerotrack.markers[id];
+  map.setView([marker.getLatLng().lat, marker.getLatLng().lng]);
+  // marker.fire("click");
   /* Hide sidebar and go to the map on small screens */
   if (document.body.clientWidth <= 767) {
     $("#sidebar").hide();
@@ -108,14 +107,4 @@ if (document.body.clientWidth <= 767) {
 
 var baseLayers = {
   "Street Map": osm
-};
-
-function syncSidebar() {
-  osm.eachLayer(function (layer) {
-      if (map.hasLayer(osm)) {
-        if (map.getBounds().contains(layer.getLatLng())) {
-          $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/theater.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
-        }
-      }
-    });
 };
