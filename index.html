@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>0track</title>
+  <style media="screen">
+    body {
+      padding: 0;
+      margin: 0;
+    }
+    html, body, #map {
+        height: 100%;
+    }
+  </style>
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+</head>
+<body>
+  <a href="#" onclick="zerotrack.sendLocation(); false;">send</a>
+  <div id="map"></div>
+  <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+  <script src="http://bitwiseshiftleft.github.io/sjcl/sjcl.js"></script>
+  <script src="zerotrack.js"></script>
+</body>
