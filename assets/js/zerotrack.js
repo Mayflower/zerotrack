@@ -37,12 +37,12 @@ Zerotrack = (function(){
 
   Zerotrack.prototype.setMarker = function(data) {
     if (typeof(this.markers[data.user]) === 'undefined') {
-      marker = new L.marker([data.lat, data.lon], 100).addTo(this.map);
-      marker.bindPopup("<strong>" + data.user + "</strong>");
+      marker = new L.circle([data.lat, data.lon], data.acc).addTo(this.map);
+      marker.bindPopup("<strong>" + data.user + "</strong>" + data.acc + "");
       this.markers[data.user] = marker;
-      $("#feature-list tbody").append('<tr class="feature-row" id="' + data.user + '" lat="' + data.lat + '" lng="' + data.lon + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/theater.png"></td><td class="feature-name">' + data.user + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>')
+      $("#feature-list tbody").append('<tr class="feature-row" id="' + data.user + '" lat="' + data.lat + '" lng="' + data.lon + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/globe.png"></td><td class="feature-name">' + data.user + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>')
     } else {
-      this.markers[data.user].setLatLng([data.lat, data.lon]).update();
+      this.markers[data.user].setLatLng([data.lat, data.lon]);
     }
   }
 
