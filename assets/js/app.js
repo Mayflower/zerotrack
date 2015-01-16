@@ -10,15 +10,31 @@ $("#about-btn").click(function() {
   return false;
 });
 
-$("#login-btn").click(function() {
-  $("#loginModal").modal("show");
+$("#pref-btn").click(function () {
+  $('#username').val(zerotrack.username);
+  $('#groupname').val(zerotrack.group);
+  $('#groupkey').val(zerotrack.groupKey());
+
+  $("#prefModal").modal("show");
   $(".navbar-collapse.in").collapse("hide");
+
+  return false;
+});
+
+$("#pref-save").click(function() {
+  $("#pref-form").submit();
+});
+
+$("#pref-form").submit(function (event) {
+  zerotrack.username = $('#username').val();
+  window.location.href = '/' + $('#groupname').val() + '#' + $('#groupkey').val();
   return false;
 });
 
 $("#list-btn").click(function() {
   $('#sidebar').toggle();
   map.invalidateSize();
+  $('.navbar-collapse').collapse('toggle');
   return false;
 });
 
@@ -41,7 +57,6 @@ $("#sidebar-hide-btn").click(function() {
 function sidebarClick(id) {
   marker = zerotrack.markers[id];
   map.setView([marker.getLatLng().lat, marker.getLatLng().lng]);
-  // marker.fire("click");
   /* Hide sidebar and go to the map on small screens */
   if (document.body.clientWidth <= 767) {
     $("#sidebar").hide();
