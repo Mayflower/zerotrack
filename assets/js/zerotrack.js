@@ -6,7 +6,7 @@ Zerotrack = (function(){
   function Zerotrack(map) {
     this.group = window.location.pathname.substring(1);
     this.username = Math.random().toString(36).substring(7);
-    this.socket = new WebSocket('ws://localhost:9393/' + this.group);
+    this.socket = new WebSocket('ws://' + window.location.hostname + ':9393/' + this.group);
     this.markers = {};
     this.map = map;
 
