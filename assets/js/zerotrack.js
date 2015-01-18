@@ -43,7 +43,7 @@ var Zerotrack = (function(){
 
     this.username = fromLocalStorage('username', Math.random().toString(36).substring(7));
     this.group    = window.location.pathname.substring(1);
-    this.socket   = new WebSocket('ws://' + window.location.hostname + ':9393/' + this.group);
+    this.socket   = new WebSocket('ws://' + window.location.hostname + '/socket/' + this.group);
     this.markers  = {};
     this.timers   = {};
     this.map      = map;
