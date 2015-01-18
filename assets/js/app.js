@@ -4,9 +4,24 @@ $(document).on("click", ".feature-row", function(e) {
   sidebarClick($(this).attr("id"));
 });
 
+$("#home").click(function() {
+  window.location.href = "/" + zerotrack.group + "#" + zerotrack.groupKey();
+  return false;
+});
+
 $("#about-btn").click(function() {
   $("#aboutModal").modal("show");
   $(".navbar-collapse.in").collapse("hide");
+  return false;
+});
+
+$("#share-location").click(function() {
+  if (zerotrack.watching === true) {
+    zerotrack.stopWatching();
+  } else {
+    zerotrack.watchPosition();
+  }
+
   return false;
 });
 
@@ -14,9 +29,12 @@ $("#pref-btn").click(function () {
   $('#username').val(zerotrack.username);
   $('#groupname').val(zerotrack.group);
   $('#groupkey').val(zerotrack.groupKey());
+  $('#showself').val(zerotrack.showself);
 
   $("#prefModal").modal("show");
   $(".navbar-collapse.in").collapse("hide");
+
+  $('#username-display').val(zerotrack.username);
 
   return false;
 });
@@ -27,6 +45,9 @@ $("#pref-save").click(function() {
 
 $("#pref-form").submit(function (event) {
   zerotrack.username = $('#username').val();
+  zerotrack.group = $('#groupname').val();
+  zerotrack.showself = $('#showself').get(0).checked;
+  localStorage.setItem('showself', $('#showself').get(0).checked);
   window.location.href = '/' + $('#groupname').val() + '#' + $('#groupkey').val();
   return false;
 });
